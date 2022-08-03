@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
 		token: String,
         patients: [
             {
-                type: Schema.Types.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref: 'Medicine'
             }
         ]
