@@ -23,6 +23,7 @@ You need to install dependencies with `npm install`
 - As an authenticated user, I want to be able to see a single patient.
 - As an authenticated user, I want to be able to create/enter a patient into the system.
 - As an authenticated user, I want to be able to edit/update a patient's details.
+- As an authenticated user, I want to be able to add a treatment plan to a patient.
 - As an authenticated user, I want to be able to delete/discharge a patient.
 - As an authenticated user, I want to be able to see all medications associated with a patient.
 - As an authenticated user, I want to be able to add a medication to a patient.
@@ -70,7 +71,7 @@ You need to install dependencies with `npm install`
 |---------|-----------------------|-----------|----------------------|
 | INDEX   | patient index         | GET       | `/patients`          |
 | SHOW    | patient show page     | GET       | `/patients/:id`      |
-| NEW     | new patient form      | POST      | `/patients/new`      |
+| NEW     | new patient form      | GET       | `/patients/new`      |
 | CREATE  | create new patient    | POST      | `/patients`          |
 | EDIT    | edit existing patient | GET       | `/patients/:id/edit` |
 | UPDATE  | update patient        | PATCH     | `/patients/:id`      |
