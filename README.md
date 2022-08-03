@@ -4,21 +4,33 @@
 A tool for doctors and nurses to monitor and update patient conditions, medications, treatments, and other critical details.
 
 ## Roles
-Nick - Team Manager
-Pedro - Frontend SME
-Larry - Backend SME
+- Nick - Team Manager
+- Pedro - Frontend SME
+- Larry - Backend SME
+
+## Pictures
+![](wireFrames/homePage.jpeg)
+![](wireFrames/patientcard.jpeg)
+![](wireFrames/loginpage.jpeg)
+![](wireFrames/newpatient.jpeg)
+![](wireFrames/beforelogin.jpeg)
+![](wireFrames/signup.jpeg)
+
 
 ## General Approach
 Patient data is seeded in the mongoDB server according to the patient model. After that, the data can be manipulated by authenticated users inside the client.
 
+We are using React with functional components for the frontend client application, and Express with Mongoose to connect to the MongoDB server on the backend.
+
 ## Installation Instructions
-You need to install dependencies with `npm install`
+You need to install dependencies with `npm install`.
+After that, `npm start` will launch both the mongoDB server and the react client.
 
 ## User Stories
-- As an unauthenticated user, I want to be able to sign up. ✓
-- As an unauthenticated user, I want to be able to log in. ✓
-- As an authenticated user, I want to be able to change my password. ✓
-- As an authenticated user, I want to be able to log out. ✓
+- As an unauthenticated user, I want to be able to sign up..
+- As an unauthenticated user, I want to be able to log in.
+- As an authenticated user, I want to be able to change my password.
+- As an authenticated user, I want to be able to log out.
 - As an authenticated user, I want to be able to see all patients.
 - As an authenticated user, I want to be able to see a single patient.
 - As an authenticated user, I want to be able to create/enter a patient into the system.
@@ -31,20 +43,28 @@ You need to install dependencies with `npm install`
 - As an authenticated user, I want to be able to delete a medication off a patient's chart.
 
 ## Models
+- User
+    - Username
+    - Password
+    - Token
+    - Patients
+
 - Patient
     - Name
-    - Age
+    - Age/DOB
     - Blood Type
     - Emergency Contact Telephone #
     - Preexisting Conditions
     - Current Condition
     - Treatment Plan/Duration
+    - Doctors
     - Medicines
     - Comments
 
 - Medicine (subdoc)
     - Name
     - Dosage
+    - Duration
 
 ## Routes
 ### User Routes
@@ -71,7 +91,7 @@ You need to install dependencies with `npm install`
 |---------|-----------------------|-----------|----------------------|
 | INDEX   | patient index         | GET       | `/patients`          |
 | SHOW    | patient show page     | GET       | `/patients/:id`      |
-| NEW     | new patient form      | GET       | `/patients/new`      |
+| NEW     | new patient form      | POST      | `/patients/new`      |
 | CREATE  | create new patient    | POST      | `/patients`          |
 | EDIT    | edit existing patient | GET       | `/patients/:id/edit` |
 | UPDATE  | update patient        | PATCH     | `/patients/:id`      |
@@ -119,6 +139,7 @@ You need to install dependencies with `npm install`
             - DeletePatientModal
         - NewPatient
 
-## Entity Relationship Diagrams
+## Entity Relationship Diagram
+![](/src/wireFrames/ERD.jpg)
 
 ## Major Hurdles/Unsolved Problems
