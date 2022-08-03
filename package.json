@@ -1,13 +1,13 @@
 {
-  "name": "express-auth-mongoose-boilerplate",
+  "name": "patient-portal",
   "version": "1.0.0",
-  "description": "Auth boilerplate for mongoose express using token auth",
+  "description": "Patient Portal app for doctors and nurses to monitor their charges.",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Timm Schoenborn",
+  "author": "Larry Mays, Pedro Abreu, Nick Esparza",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
