@@ -140,6 +140,6 @@ After that, `npm start` will launch both the mongoDB server and the react client
         - NewPatient
 
 ## Entity Relationship Diagram
-![](/src/wireFrames/ERD.jpg)
+![](wireFrames/ERD.jpg)
 
 ## Major Hurdles/Unsolved Problems
