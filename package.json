@@ -1,13 +1,13 @@
 {
-  "name": "express-auth-mongoose-boilerplate",
+  "name": "the-medics-app",
   "version": "1.0.0",
-  "description": "Auth boilerplate for mongoose express using token auth",
+  "description": "A tool for doctors and nurses to monitor and update patient conditions, medications, treatments, and other critical details.",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Timm Schoenborn",
+  "author": "Larry, Pedro, Nick; The Medics",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
