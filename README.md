@@ -44,27 +44,27 @@ After that, `npm start` will launch both the mongoDB server and the react client
 
 ## Models
 - User
-    - Username
-    - Password
-    - Token
-    - Patients
+    - Username: String
+    - Password: String (hashed)
+    - Token: String
+    - Patients: Array
 
 - Patient
-    - Name
-    - Age/DOB
-    - Blood Type
-    - Emergency Contact Telephone #
-    - Preexisting Conditions
-    - Current Condition
-    - Treatment Plan/Duration
-    - Doctors
-    - Medicines
-    - Comments
+    - Name: String
+    - Age/DOB: Date
+    - Blood Type: String, enum
+    - Emergency Contact Telephone #: String
+    - Preexisting Conditions: String
+    - Current Condition: String, enum
+    - Treatment Plan/Duration: String
+    - Doctors: Array
+    - Medicines: Array
+    - Comments: String
 
 - Medicine (subdoc)
-    - Name
-    - Dosage
-    - Duration
+    - Name: String
+    - Dosage: String
+    - Duration: String
 
 ## Routes
 ### User Routes
