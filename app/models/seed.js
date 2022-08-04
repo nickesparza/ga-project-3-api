@@ -11,7 +11,7 @@ const starterPatients = [
         bloodType: "A-",
         emergencyContact: "555-123-4567",
         preCon: "too cool for school",
-        currCon: "stable",
+        currCon: "MonkeyPox",
         treatment: "",
         comments: "none"
     },
