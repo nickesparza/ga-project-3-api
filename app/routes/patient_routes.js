@@ -100,6 +100,33 @@ router.patch('/patients/:id', requireToken, removeBlanks, (req, res, next) => {
 		.catch(next)
 })
 
+// ATTEND to patient - append user to the "doctors" array
+// PATCH /pets/5a7db6c74d55bc51bdf39793
+router.patch('/patients/:id/attend', requireToken, removeBlanks, (req, res, next) => {
+	// if the client attempts to change the `owner` property by including a new
+	// owner, prevent that by deleting that key/value pair
+	// delete req.body.patient.owner
+
+	Patient.findById(req.params.id)
+		.then(handle404)
+		.then((patient) => {
+			// get current user id
+            const newDoctor = req.user.id
+            // if doctors array doesn't contain user id, push it in, if it does, pull it out
+            if (patient.doctors.includes(newDoctor)) {
+                patient.doctors.splice(patient.doctors.indexOf(newDoctor), 1)
+            } else {
+                patient.doctors.push(newDoctor)
+            }
+            // return saved patient
+            return patient.save()
+		})
+		// if that succeeded, return 204 and no JSON
+		.then(() => res.sendStatus(204))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
 // DESTROY
 // DELETE /patients/5a7db6c74d55bc51bdf39793
 router.delete('/patients/:id', requireToken, (req, res, next) => {
