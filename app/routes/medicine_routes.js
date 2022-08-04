@@ -29,7 +29,7 @@ router.post('/medication/:patientId', removeBlanks, (req, res, next) => {
             console.log('this is the patient', patient)
             console.log('this is the medication', medication)
             // push the medication to the patient medication array 
-            patient.medication.push(medication)
+            patient.medicines.push(medication)
             //save the patient 
             return patient.save()
         }) 
@@ -44,19 +44,22 @@ router.patch('/medication/:patientId/:medicationId', requireToken, removeBlanks,
     // get the medication and the patient ids saved to variables
     const patientId = req.params.patientId
     const medicationId = req.params.medicationId
-
+    console.log(patientId, medicationId, "this is patient and medication id ")
     // find our patient
     Patient.findById(patientId)
         .then(handle404)
         .then(patient => {
+            console.log(patient, "this the patient")
             // single out the medication (.id is a subdoc method to find something in an array of subdocs)
-            const theMedication = patient.medication.id(medicationId)
+            const theMedication = patient.medicines.id(medicationId)
+            console.log(theMedication, "this the meds")
             // make sure the user sending the request is the owner
-            requireOwnership(req, patient)
+            // requireOwnership(req, patient)
             // update the medication with a subdocument method
-            theMedication.set(req.body.medication)
+            console.log(req.body.medicines, "im tryna find out what this is")
+            theMedication.set(req.body.medicines)
             // return the saved medication
-            return medication.save()
+            return patient.save()
         })
         .then(() => res.sendStatus(204))
         .catch(next)
@@ -71,22 +74,22 @@ router.delete('/medication/:patientId/:medicationId', requireToken, (req,res,nex
     //then we find patient 
     Patient.findById(patientId)
     //handle 404
-    .then(handle404)
-    //do stuff with medication (in this case delete it )
-    .then(patient => {
-        //we can get subdoc same way as update 
-        const theMedication = patient.medication.id(toyId)
-        //require user deleting is the owner of the patient
-        requireOwnership(req,patient)
-        //call remove on the subdoc
-        theMedication.remove()
-        //return the saved patient
-        return patient.save()
-    })
-    //send 204 no content status
-    .then(()=> res.sendStatus(204))
-    //handle errors
-    .catch(next)
+        .then(handle404)
+        //do stuff with medication (in this case delete it )
+        .then(patient => {
+            //we can get subdoc same way as     update 
+            const theMedication = patient.medicines.id(medicationId)
+            //require user deleting is the owner    of the patient
+            // requireOwnership(req,patient.medicines)
+            //call remove on the subdoc
+            theMedication.remove()
+            //return the saved patient
+            return patient.save()
+            })
+        //send 204 no content status
+        .then(()=> res.sendStatus(204))
+        //handle errors
+        .catch(next)
 
 })
 
