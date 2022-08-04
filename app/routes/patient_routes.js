@@ -4,7 +4,7 @@ const express = require('express')
 const passport = require('passport')
 
 // pull in Mongoose model for patients
-const Patient = require('../models/patient ')
+const Patient = require('../models/patient')
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -29,7 +29,7 @@ const router = express.Router()
 
 // INDEX
 // GET /patients
-router.get('/patients', (req, res, next) => {
+router.get('/patients', requireToken, (req, res, next) => {
 	Patient.find()
 		.then((patients) => {
 			// `patients` will be an array of Mongoose documents
@@ -45,7 +45,7 @@ router.get('/patients', (req, res, next) => {
 
 // SHOW
 // GET /patients/5a7db6c74d55bc51bdf39793
-router.get('/patients/:id', (req, res, next) => {
+router.get('/patients/:id', requireToken, (req, res, next) => {
 	// req.params.id will be set based on the `:id` in the route
 	Patient.findById(req.params.id)
 		.then(handle404)
@@ -84,7 +84,7 @@ router.patch('/patients/:id', requireToken, removeBlanks, (req, res, next) => {
 		.then((patient) => {
 			// pass the `req` object and the Mongoose record to `requireOwnership`
 			// it will throw an error if the current user isn't the owner
-			requireOwnership(req, patient)
+			// requireOwnership(req, patient)
 
 			// pass the result of Mongoose's `.update` to the next `.then`
 			return patient.updateOne(req.body.patient)
@@ -102,7 +102,7 @@ router.delete('/patients/:id', requireToken, (req, res, next) => {
 		.then(handle404)
 		.then((patient) => {
 			// throw an error if current user doesn't own `patient`
-			requireOwnership(req, patient)
+			// requireOwnership(req, patient)
 			// delete the patient ONLY IF the above didn't throw
 			patient.deleteOne()
 		})

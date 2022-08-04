@@ -2,8 +2,10 @@ const mongoose = require('mongoose')
 // medicineSchema is required for this to work, since it is a subdocument for patient
 const medicineSchema = require ('./medicine')
 
+const { Schema, model } = mongoose
+
 // create new schema for patients
-const patientSchema = new mongoose.Schema(
+const patientSchema = new Schema(
 	{
         // name is a string, and required
 		name: {
@@ -55,4 +57,4 @@ const patientSchema = new mongoose.Schema(
 	}
 )
 
-module.exports = mongoose.model('Patient', patientSchema)
+module.exports = model('Patient', patientSchema)
