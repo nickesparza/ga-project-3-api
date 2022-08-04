@@ -77,7 +77,7 @@ router.post('/patients', requireToken, (req, res, next) => {
 		.catch(next)
 })
 
-// UPDATE
+// UPDATE - general update route for most patient fields
 // PATCH /pets/5a7db6c74d55bc51bdf39793
 router.patch('/patients/:id', requireToken, removeBlanks, (req, res, next) => {
 	// if the client attempts to change the `owner` property by including a new
@@ -100,13 +100,9 @@ router.patch('/patients/:id', requireToken, removeBlanks, (req, res, next) => {
 		.catch(next)
 })
 
-// ATTEND to patient - append user to the "doctors" array
+// ATTEND to patient - append/remove user to the "doctors" array to enable a button for "attend" on the frontend
 // PATCH /pets/5a7db6c74d55bc51bdf39793
 router.patch('/patients/:id/attend', requireToken, removeBlanks, (req, res, next) => {
-	// if the client attempts to change the `owner` property by including a new
-	// owner, prevent that by deleting that key/value pair
-	// delete req.body.patient.owner
-
 	Patient.findById(req.params.id)
 		.then(handle404)
 		.then((patient) => {
