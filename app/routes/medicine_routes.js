@@ -1,23 +1,23 @@
 // pulled from patients routes /////////////////////////
 const express = require('express')
 const passport = require('passport')
-const Pet = require('../models/patient')
+const Patient = require('../models/patient')
 const customErrors = require('../../lib/custom_errors')
 const handle404 = customErrors.handle404
 const requireOwnership = customErrors.requireOwnership
 const removeBlanks = require('../../lib/remove_blank_fields')
-const pet = require('../models/patient')
+const patient = require('../models/patient')
 const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
-// pulled from patients, now go to server and copy patients route change to toy and add it to app.use under pets 
+// pulled from patients, now go to server and copy patients route change to medication and add it to app.use under patients 
 
 /////////////////routes go below////////////////////////////////
 
 //// CREATE
-// POST /medication/<pet_id>
+// POST /medication/<patient_id>
 router.post('/medication/:patientId', removeBlanks, (req, res, next) => {
-	// //get our toy from req.body
+	// //get our medication from req.body
     const medication = req.body.medication
     //get our patient's id from req.params.patientId
 	const patientId = req.params.patientId
@@ -41,11 +41,11 @@ router.post('/medication/:patientId', removeBlanks, (req, res, next) => {
 // UPDATE a Medication
 // PATCH /medication/<patient_id>/<medication_id>
 router.patch('/medication/:patientId/:medicationId', requireToken, removeBlanks, (req, res, next) => {
-    // get the toy and the pet ids saved to variables
+    // get the medication and the patient ids saved to variables
     const patientId = req.params.patientId
     const medicationId = req.params.medicationId
 
-    // find our pet
+    // find our patient
     Patient.findById(patientId)
         .then(handle404)
         .then(patient => {
