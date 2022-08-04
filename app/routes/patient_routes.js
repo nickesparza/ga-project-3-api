@@ -63,6 +63,7 @@ router.post('/patients', requireToken, (req, res, next) => {
 	req.body.patient.owner = req.user.id
 
 	Patient.create(req.body.patient)
+        // also add owner to the list of attending doctors
         .then(patient => {
             patient.doctors.push(req.body.patient.owner)
             return patient.save()
