@@ -42,8 +42,12 @@ const patientSchema = new Schema(
         // medicines will be a list of medicines derived from the medicine schema imported above
         medicines: [medicineSchema],
         // comments are an optional string
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
         comments: String,
-        // doctors take the place of "owners", will be an array of user IDs that are updated when users add themselves as attending to a patient
+        // doctors is an array of users, including the owner ID by default, that are updated when users add themselves as attending to a patient
 		doctors: [
             {
                 type: mongoose.Schema.Types.ObjectId,

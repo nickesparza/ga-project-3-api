@@ -31,6 +31,7 @@ const router = express.Router()
 // GET /patients
 router.get('/patients', requireToken, (req, res, next) => {
 	Patient.find()
+        .populate('doctors')
 		.then((patients) => {
 			// `patients` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
@@ -62,7 +63,11 @@ router.post('/patients', requireToken, (req, res, next) => {
 	req.body.patient.owner = req.user.id
 
 	Patient.create(req.body.patient)
-		// respond to succesful `create` with status 201 and JSON of new "pet"
+        .then(patient => {
+            patient.doctors.push(req.body.patient.owner)
+            return patient.save()
+        })
+		// respond to succesful `create` with status 201 and JSON of new "patient"
 		.then((patient) => {
 			res.status(201).json({ patient: patient.toObject() })
 		})
