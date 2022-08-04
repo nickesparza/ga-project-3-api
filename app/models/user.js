@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema(
 			required: true,
 		},
 		token: String,
+        patients: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Medicine'
+            }
+        ]
 	},
 	{
 		timestamps: true,
