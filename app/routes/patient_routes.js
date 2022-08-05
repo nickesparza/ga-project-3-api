@@ -49,6 +49,7 @@ router.get('/patients', requireToken, (req, res, next) => {
 router.get('/patients/:id', requireToken, (req, res, next) => {
 	// req.params.id will be set based on the `:id` in the route
 	Patient.findById(req.params.id)
+        .populate('doctors')
 		.then(handle404)
 		// if `findById` is succesful, respond with 200 and "patient" JSON
 		.then((patient) => res.status(200).json({ patient: patient.toObject() }))
