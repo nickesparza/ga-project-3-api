@@ -63,6 +63,7 @@ router.post('/patients', requireToken, (req, res, next) => {
 	req.body.patient.owner = req.user.id
 
 	Patient.create(req.body.patient)
+        // also add owner to the list of attending doctors
         .then(patient => {
             patient.doctors.push(req.body.patient.owner)
             return patient.save()
@@ -77,7 +78,7 @@ router.post('/patients', requireToken, (req, res, next) => {
 		.catch(next)
 })
 
-// UPDATE
+// UPDATE - general update route for most patient fields
 // PATCH /pets/5a7db6c74d55bc51bdf39793
 router.patch('/patients/:id', requireToken, removeBlanks, (req, res, next) => {
 	// if the client attempts to change the `owner` property by including a new
@@ -93,6 +94,29 @@ router.patch('/patients/:id', requireToken, removeBlanks, (req, res, next) => {
 
 			// pass the result of Mongoose's `.update` to the next `.then`
 			return patient.updateOne(req.body.patient)
+		})
+		// if that succeeded, return 204 and no JSON
+		.then(() => res.sendStatus(204))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// ATTEND to patient - append/remove user to the "doctors" array to enable a button for "attend" on the frontend
+// PATCH /pets/5a7db6c74d55bc51bdf39793
+router.patch('/patients/:id/attend', requireToken, removeBlanks, (req, res, next) => {
+	Patient.findById(req.params.id)
+		.then(handle404)
+		.then((patient) => {
+			// get current user id
+            const newDoctor = req.user.id
+            // if doctors array doesn't contain user id, push it in, if it does, pull it out
+            if (patient.doctors.includes(newDoctor)) {
+                patient.doctors.splice(patient.doctors.indexOf(newDoctor), 1)
+            } else {
+                patient.doctors.push(newDoctor)
+            }
+            // return saved patient
+            return patient.save()
 		})
 		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
