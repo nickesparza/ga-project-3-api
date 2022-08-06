@@ -49,15 +49,15 @@ router.patch('/medication/:patientId/:medicineId', requireToken, removeBlanks, (
     Patient.findById(patientId)
         .then(handle404)
         .then(patient => {
-            console.log(patient, "this the patient")
+            console.log("this the patient", patient)
             // single out the medication (.id is a subdoc method to find something in an array of subdocs)
             const theMedication = patient.medicines.id(medicationId)
-            console.log(theMedication, "this the meds")
+            console.log("this the meds", theMedication)
             // make sure the user sending the request is the owner
             // requireOwnership(req, patient)
             // update the medication with a subdocument method
-            console.log(req.body.medicines, "im tryna find out what this is")
-            theMedication.set(req.body.medicines)
+            console.log("im tryna find out what this is", req.body.medicine)
+            theMedication.set(req.body.medicine)
             // return the saved medication
             return patient.save()
         })
