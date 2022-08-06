@@ -18,7 +18,7 @@ const router = express.Router()
 // POST /medication/<patient_id>
 router.post('/medication/:patientId', removeBlanks, (req, res, next) => {
 	// //get our medication from req.body
-    const medication = req.body.medication
+    const medication = req.body.medicine
     //get our patient's id from req.params.patientId
 	const patientId = req.params.patientId
 
@@ -40,10 +40,10 @@ router.post('/medication/:patientId', removeBlanks, (req, res, next) => {
 
 // UPDATE a Medication
 // PATCH /medication/<patient_id>/<medication_id>
-router.patch('/medication/:patientId/:medicationId', requireToken, removeBlanks, (req, res, next) => {
+router.patch('/medication/:patientId/:medicineId', requireToken, removeBlanks, (req, res, next) => {
     // get the medication and the patient ids saved to variables
     const patientId = req.params.patientId
-    const medicationId = req.params.medicationId
+    const medicationId = req.params.medicineId
     console.log(patientId, medicationId, "this is patient and medication id ")
     // find our patient
     Patient.findById(patientId)
@@ -67,10 +67,10 @@ router.patch('/medication/:patientId/:medicationId', requireToken, removeBlanks,
 
 //delete
 //Delete /medication/<patient_Id>/<medication_Id>
-router.delete('/medication/:patientId/:medicationId', requireToken, (req,res,next)=> {
+router.delete('/medication/:patientId/:medicineId', requireToken, (req,res,next)=> {
     // get the medication and the patient ids saved to variables
     const patientId =req.params.patientId
-    const medicationId = req.params.medicationId
+    const medicationId = req.params.medicineId
     //then we find patient 
     Patient.findById(patientId)
     //handle 404
