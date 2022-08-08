@@ -18,12 +18,16 @@ A tool for doctors and nurses to monitor and update patient conditions, medicati
 
 
 ## General Approach
+This is a MERN stack application; we leverage node.js and React with functional components for the frontend client application, along with React Bootstrap for styling. The client connects via Express with Mongoose to the MongoDB server on the backend.
+
 Patient data is seeded in the mongoDB server according to the patient model. After that, the data can be manipulated by authenticated users inside the client.
 
-We are using React with functional components for the frontend client application, and Express with Mongoose to connect to the MongoDB server on the backend.
+Our approach was to increase the complexity of the document being handled while still providing a clear user experience. The user has multiple ways to update patient data via several different update forms that appear depending on the fields requested. Users can also create and discharge patients, as well as prescribe medication with a specified dose and treatment course.
+
 
 ## Installation Instructions
 You need to install dependencies with `npm install`.
+a seed script is available via `npm run seed` to provide some starter data to work with.
 After that, `npm start` will launch both the mongoDB server and the react client.
 
 ## User Stories
@@ -51,15 +55,15 @@ After that, `npm start` will launch both the mongoDB server and the react client
 
 - Patient
     - Name: String
-    - Age/DOB: Date
+    - Age: Number
     - Blood Type: String, enum
     - Emergency Contact Telephone #: String
     - Preexisting Conditions: String
     - Current Condition: String, enum
-    - Treatment Plan/Duration: String
+    - Treatment Plan: String
+    - Comments: String
     - Doctors: Array
     - Medicines: Array
-    - Comments: String
 
 - Medicine (subdoc)
     - Name: String
@@ -87,23 +91,24 @@ After that, `npm start` will launch both the mongoDB server and the react client
 | `/patients/delete`   | `DeletePatient` | Confirmation for deleting patient | Yes                   |
 
 #### Express
-| REST    | Description           | HTTP Verb | Express Route        |
-|---------|-----------------------|-----------|----------------------|
-| INDEX   | patient index         | GET       | `/patients`          |
-| SHOW    | patient show page     | GET       | `/patients/:id`      |
-| NEW     | new patient form      | POST      | `/patients/new`      |
-| CREATE  | create new patient    | POST      | `/patients`          |
-| EDIT    | edit existing patient | GET       | `/patients/:id/edit` |
-| UPDATE  | update patient        | PATCH     | `/patients/:id`      |
-| DESTROY | remove patient        | DELETE    | `/patients/:id`      |
+| REST    | Description                   | HTTP Verb | Express Route          |
+|---------|-------------------------------|-----------|------------------------|
+| INDEX   | patient index                 | GET       | `/patients`            |
+| SHOW    | patient show page             | GET       | `/patients/:id`        |
+| NEW     | new patient form              | POST      | `/patients/new`        |
+| CREATE  | create new patient            | POST      | `/patients`            |
+| EDIT    | edit existing patient         | GET       | `/patients/:id/edit`   |
+| UPDATE  | Set user to attend to patient | PATCH     | `/patients/:id/attend` |
+| UPDATE  | update patient                | PATCH     | `/patients/:id`        |
+| DESTROY | remove patient                | DELETE    | `/patients/:id`        |
 
 ### Medicine Routes
 #### Express
-| REST    | Description           | HTTP Verb | Express Route        |
-|---------|-----------------------|-----------|----------------------|
-| NEW     | create new medicine   | POST      | `/medicines/`        |
-| UPDATE  | update medicine       | PATCH     | `/medicines/:id`     |
-| DESTROY | remove medicine       | DELETE    | `/medicines/:id`     |
+| REST    | Description           | HTTP Verb | Express Route                         |
+|---------|-----------------------|-----------|---------------------------------------|
+| NEW     | create new medicine   | POST      | `/medications/:patientId`             |
+| UPDATE  | update medicine       | PATCH     | `/medications/:medicineId/:patientId` |
+| DESTROY | remove medicine       | DELETE    | `/medicines/medicineId/:patientId`    |
 
 #### React Components
 | Component Name        | Description                                                 |
@@ -111,6 +116,7 @@ After that, `npm start` will launch both the mongoDB server and the react client
 | `ShowMedicine`        | Main container for medicine details and UI options          |
 | `CreateMedicineModal` | Modal that appears on ShowPatient page to create a medicine |
 | `EditMedicineModal`   | Modal that appears on ShowPatient page to edit a medicine   |
+| `DeleteMedicineModal` | Modal that confirms the deletion of a medicine              |
 
 ## Stretch Goals
 - Alert system
