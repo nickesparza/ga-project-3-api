@@ -8,22 +8,12 @@ A tool for doctors and nurses to monitor and update patient conditions, medicati
 - Pedro - Frontend SME
 - Larry - Backend SME
 
-## Pictures
-![](wireFrames/homePage.jpeg)
-![](wireFrames/patientcard.jpeg)
-![](wireFrames/loginpage.jpeg)
-![](wireFrames/newpatient.jpeg)
-![](wireFrames/beforelogin.jpeg)
-![](wireFrames/signup.jpeg)
-
-
 ## General Approach
 This is a MERN stack application; we leverage node.js and React with functional components for the frontend client application, along with React Bootstrap for styling. The client connects via Express with Mongoose to the MongoDB server on the backend.
 
 Patient data is seeded in the mongoDB server according to the patient model. After that, the data can be manipulated by authenticated users inside the client.
 
 Our approach was to increase the complexity of the document being handled while still providing a clear user experience. The user has multiple ways to update patient data via several different update forms that appear depending on the fields requested. Users can also create and discharge patients, as well as prescribe medication with a specified dose and treatment course.
-
 
 ## Installation Instructions
 You need to install dependencies with `npm install`.
@@ -149,3 +139,12 @@ After that, `npm start` will launch both the mongoDB server and the react client
 ![](wireFrames/ERD.jpg)
 
 ## Major Hurdles/Unsolved Problems
+We had some stretch goals in mind, but ran out of time to find a workable implementation. We decided to go for visual polish over aggressive expansion of functionality near the deadline.
+
+## Pictures
+![](wireFrames/homePage.jpeg)
+![](wireFrames/patientcard.jpeg)
+![](wireFrames/loginpage.jpeg)
+![](wireFrames/newpatient.jpeg)
+![](wireFrames/beforelogin.jpeg)
+![](wireFrames/signup.jpeg)
