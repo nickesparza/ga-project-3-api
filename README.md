@@ -1,4 +1,4 @@
-# GA Project 3 - Patient Portal
+# GA Project 3 - The Medic App
 
 ## Sales Pitch
 A tool for doctors and nurses to monitor and update patient conditions, medications, treatments, and other critical details.
