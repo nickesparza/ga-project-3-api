@@ -1,7 +1,7 @@
 # GA Project 3 - The Medic App
 
 ## Sales Pitch
-A tool for doctors and nurses to monitor and update patient conditions, medications, treatments, and other critical details.
+A tool for doctors and nurses to monitor and update patient conditions, medications, treatments, and other critical details. Designed to be used with the front-end repository located [here](https://github.com/nickesparza/ga-project-3-client).
 
 ## Roles
 - Nick - Team Manager
